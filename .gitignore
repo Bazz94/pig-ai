@@ -1,0 +1,4 @@
+# Ignore Docker-related files
+*.log
+.env
+.DS_Store
