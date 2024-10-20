@@ -1,0 +1,22 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  Deploy:  
+    environment: production
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: Copy file via SSH key
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: 22
+          key: ${{ secrets.KEY }}
+          overwrite: true
+          source: index.html
+          target: /var/www/html
